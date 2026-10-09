@@ -1,32 +1,30 @@
-# Sends this repo's GitHub Environment variables and secrets to Inferra.
-#
-# GitHub Environment = Inferra space (prod, preview). On every push to main
-# (or a manual run) this job hands each environment's variables and secrets to
-# the space of the same name. Inferra stores secrets encrypted, never shows
-# them back, and restarts the apps in a space when a value changed.
-#
-# Why a workflow: GitHub never lets an app read secret values (only a running
-# workflow gets them), so one route carries both. A changed variable or secret
-# arrives on the next push, or run this workflow by hand.
+# Sends this repo's GitHub Environment variables and the secrets listed below
+# to the Inferra space of the same name (prod, preview), on every push to main
+# or a manual run. Only the secrets named here leave GitHub.
 name: inferra-env
 on:
   push:
     branches: [main]
   workflow_dispatch: {}
 
-permissions:
-  id-token: write   # the Action proves "this is this repo's workflow" to Inferra (no stored Inferra token)
+permissions: {}
 
 jobs:
   sync:
+    permissions:
+      id-token: write   # proves to Inferra which repo this is; no stored token
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
-        environment: [prod, preview]   # GitHub Environment name = Inferra space name
-    environment: ${{ matrix.environment }}
+        space: [prod, preview]
+    environment: ${{ matrix.space }}
     steps:
-      - uses: inferra-ai/sync-env@v1
+      - uses: inferra-ai/sync-env@0c9b8a2552069f9b3312ab07238970965c9829c5 # v1.0.1
         with:
-          space: ${{ matrix.environment }}
-          variables: ${{ toJSON(vars) }}     # env vars
-          secrets: ${{ toJSON(secrets) }}    # secrets
+          space: ${{ matrix.space }}
+          variables: ${{ toJSON(vars) }}
+          secrets: |
+            {
+              "GREETING_SECRET": ${{ toJSON(secrets.GREETING_SECRET) }}
+            }
