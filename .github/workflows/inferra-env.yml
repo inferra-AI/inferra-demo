@@ -1,0 +1,32 @@
+# Sends this repo's GitHub Environment variables and secrets to Inferra.
+#
+# GitHub Environment = Inferra space (prod, preview). On every push to main
+# (or a manual run) this job hands each environment's variables and secrets to
+# the space of the same name. Inferra stores secrets encrypted, never shows
+# them back, and restarts the apps in a space when a value changed.
+#
+# Why a workflow: GitHub never lets an app read secret values (only a running
+# workflow gets them), so one route carries both. A changed variable or secret
+# arrives on the next push, or run this workflow by hand.
+name: inferra-env
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+permissions:
+  id-token: write   # the Action proves "this is this repo's workflow" to Inferra (no stored Inferra token)
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        environment: [prod, preview]   # GitHub Environment name = Inferra space name
+    environment: ${{ matrix.environment }}
+    steps:
+      - uses: inferra-ai/sync-env@v1
+        with:
+          space: ${{ matrix.environment }}
+          variables: ${{ toJSON(vars) }}     # env vars
+          secrets: ${{ toJSON(secrets) }}    # secrets
