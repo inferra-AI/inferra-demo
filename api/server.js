@@ -14,7 +14,7 @@ http
     res.end(
       JSON.stringify({
         app: "api",
-        greeting: process.env.GREETING || "hello from Inferra, deployed with git push",
+        greeting: process.env.GREETING || "hello from Inferra, deployed with one git push",
         database: db ? `connected via ${db}` : "none yet",
       }) + "\n",
     );
