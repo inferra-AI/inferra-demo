@@ -2,6 +2,10 @@
   "name": "worker",
   "version": "1.0.0",
   "private": true,
-  "scripts": { "start": "node worker.js" },
-  "engines": { "node": ">=20" }
+  "scripts": {
+    "start": "node worker.js"
+  },
+  "engines": {
+    "node": "24.x"
+  }
 }
