@@ -23,7 +23,7 @@ jobs:
       - uses: inferra-ai/sync-env@0bf75b7bb99434cdda6bc0b42f542e16f08fb982 # v1.0.3
         with:
           space: ${{ matrix.space }}
-          api-url: https://api.dev.inferralab.com   # preview platform
+          api-url: https://api.dev.inferralab.dev   # preview platform
           variables: ${{ toJSON(vars) }}
           secrets: |
             {

@@ -12,4 +12,4 @@ Open a branch and it gets its own preview copy; delete the branch and the previe
 Env vars and secrets are set in this repo's GitHub Environments (`prod`, `preview`)
 and sent to Inferra by `.github/workflows/inferra-env.yml`.
 
-Live demo: https://inferralab.com/demo · read-only dashboard: https://api.dev.inferralab.com/demo
+Live demo: https://inferralab.com/demo · read-only dashboard: https://api.dev.inferralab.dev/demo
