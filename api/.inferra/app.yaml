@@ -6,10 +6,8 @@ health:
   path: /healthz
 cpu: 0.5
 memory: 512Mi
-scale:
-  min: 1
-  max: 2
-  on: cpu
-  target: 70
+# v1 had replicas {min: 1, max: 2} but no autoscaler: one pod always ran
+# (max only counted toward quota). instances: 1 reproduces that.
+instances: 1
 secrets:
   - GREETING_SECRET
