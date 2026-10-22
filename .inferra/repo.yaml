@@ -1,0 +1,17 @@
+version: 3
+
+# main: api + worker (1 CPU / 768Mi) with room for a rolling
+# update of both apps at once (one extra pod each).
+# Previews: v1 matched any branch depth; v3's * stops at "/", so depths 1-4
+# are listed. Deeper names get no preview. Pattern quotas are per branch.
+branches:
+  main:
+    quota: {cpu: 2, memory: 2Gi, storage: 8Gi}
+  "*":
+    quota: {cpu: 2, memory: 1536Mi, storage: 4Gi}
+  "*/*":
+    quota: {cpu: 2, memory: 1536Mi, storage: 4Gi}
+  "*/*/*":
+    quota: {cpu: 2, memory: 1536Mi, storage: 4Gi}
+  "*/*/*/*":
+    quota: {cpu: 2, memory: 1536Mi, storage: 4Gi}
