@@ -20,7 +20,7 @@ jobs:
         space: [main]
     environment: ${{ matrix.space }}
     steps:
-      - uses: inferra-ai/sync-env@27834fc19c6e85631053802e16611aa2f63c70c6 # v1.0.4
+      - uses: inferra-ai/sync-env@9f276f3cbc9dde9eaebc619950ab11b4ed074c03 # v1.0.7
         with:
           space: ${{ matrix.space }}
           api-url: https://api.dev.inferralab.dev   # preview platform
