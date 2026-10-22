@@ -1,0 +1,9 @@
+version: 3
+name: worker
+type: worker
+command: node worker.js
+cpu: 0.5
+memory: 256Mi
+instances: 1
+secrets:
+  - GREETING_SECRET

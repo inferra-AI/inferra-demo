@@ -1,5 +1,5 @@
 # Sends this repo's GitHub Environment variables and the secrets listed below
-# to the Inferra space of the same name (prod, preview), on every push to main
+# to the Inferra space of the same name (main), on every push to main
 # or a manual run. Only the secrets named here leave GitHub.
 name: inferra-env
 on:
@@ -17,7 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        space: [prod, preview]
+        space: [main]
     environment: ${{ matrix.space }}
     steps:
       - uses: inferra-ai/sync-env@27834fc19c6e85631053802e16611aa2f63c70c6 # v1.0.4

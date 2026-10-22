@@ -1,0 +1,9 @@
+version: 3
+
+branches:
+  main:
+    quota: {cpu: 2, memory: 2Gi, storage: 8Gi}
+  "*":
+    quota: {cpu: 1, memory: 1Gi, storage: 4Gi}
+  "*/*":
+    quota: {cpu: 1, memory: 1Gi, storage: 4Gi}
